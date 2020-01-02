@@ -4,16 +4,23 @@ exports.up = function(knex) {
     exercises.increments();
 
     // exercise type
-    exercises.string("type", 128);
-
-    // exercise sets
-    exercises.integer("sets");
+    exercises.string("type", 128).notNullable();
 
     // exercise reps
-    exercises.integer("reps");
+    exercises.integer("reps").notNullable();
 
     // exercise completed at
-    exercises.timestamp("completed_at").defaultTo(knex.fn.now());
+    exercises.timestamp("created_at").defaultTo(knex.fn.now());
+
+    // connects exercise to user (foreign key)
+    exercises
+      .integer("user_id")
+      .notNullable()
+      .unsigned()
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
   });
 };
 
