@@ -9,7 +9,7 @@ exports.up = function(knex) {
     // exercise reps
     exercises.integer("reps").notNullable();
 
-    // exercise completed at
+    // exercise created at
     exercises.timestamp("created_at").defaultTo(knex.fn.now());
 
     // connects exercise to user (foreign key)

@@ -6,9 +6,9 @@ const Exercises = require("./exercise-model");
 
 router.post("/", (req, res) => {
   let exercise = req.body;
-  // const token = req.headers.authorization;
-  // const decoded = jwt_decode(token);
-  // photo.user_id = decoded.subject;
+  //   const token = req.headers.authorization;
+  //   const decoded = jwt_decode(token);
+  //   photo.user_id = decoded.subject;
 
   Exercises.add(exercise)
     .then(newExercise => {
