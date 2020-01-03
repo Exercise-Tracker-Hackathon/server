@@ -24,9 +24,7 @@ router.get("/:id", verifyUserId, async (req, res) => {
     Promise.all(
       user.exercises.map(async exercise => {
         const sets = await Users.getNumberOfSetsbyExerciseId(exercise.id);
-        // const list = await Photos.getLikesByPhotoId(photo.id);
         exercise.sets = sets.length;
-        // photo.likes = list;
         return sets;
       })
     ).then(results => {
@@ -36,25 +34,6 @@ router.get("/:id", verifyUserId, async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
-// router.get("/:id/tasks", restricted, verifyUserId, (req, res) => {
-//   const id = req.params.id;
-
-//   Users.findById(id)
-//     .then(user => {
-//       Users.getTasksByUserId(id)
-//         .then(tasks => {
-//           res.status(200).json({ ...user, tasks });
-//           console.log(user, tasks);
-//         })
-//         .catch(err => {
-//           res.status(500).json(err);
-//         });
-//     })
-//     .catch(err => {
-//       res.status(500).json(err);
-//     });
-// });
 
 // ---------------------- Custom Middleware ---------------------- //
 
