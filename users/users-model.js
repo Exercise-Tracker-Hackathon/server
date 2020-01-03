@@ -5,7 +5,8 @@ module.exports = {
   find,
   findBy,
   findById,
-  getExercisesByUserId
+  getExercisesByUserId,
+  getNumberOfSetsbyExerciseId
 };
 
 function find() {
@@ -30,4 +31,8 @@ function findById(id) {
 
 function getExercisesByUserId(id) {
   return db("exercises").where({ user_id: id });
+}
+
+function getNumberOfSetsbyExerciseId(id) {
+  return db("sets").where({ exercise_id: id });
 }
