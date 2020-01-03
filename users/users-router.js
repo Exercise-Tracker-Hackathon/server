@@ -20,7 +20,18 @@ router.get("/:id", verifyUserId, async (req, res) => {
     user.exercises = await Users.getExercisesByUserId(id);
 
     delete user.password;
-    res.status(200).json({ user });
+
+    Promise.all(
+      user.exercises.map(async exercise => {
+        const sets = await Users.getNumberOfSetsbyExerciseId(exercise.id);
+        // const list = await Photos.getLikesByPhotoId(photo.id);
+        exercise.sets = sets.length;
+        // photo.likes = list;
+        return sets;
+      })
+    ).then(results => {
+      res.status(200).json({ user });
+    });
   } catch (error) {
     res.status(500).json({ error });
   }
