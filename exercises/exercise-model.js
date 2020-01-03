@@ -4,7 +4,8 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  update
 };
 
 function find() {
@@ -25,4 +26,12 @@ function findById(id) {
   return db("exercises")
     .where({ id })
     .first();
+}
+
+async function update(id, changes) {
+  await db("exercises")
+    .where({ id })
+    .update(changes);
+
+  return db("exercises").where({ user_id: id });
 }

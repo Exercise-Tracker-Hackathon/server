@@ -29,4 +29,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+  const changes = req.body;
+
+  Exercises.update(id, changes)
+    .then(updatedExercise => {
+      res.status(201).json({ updatedExercise });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 module.exports = router;
