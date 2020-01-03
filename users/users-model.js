@@ -4,7 +4,8 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  getExercisesByUserId
 };
 
 function find() {
@@ -25,4 +26,8 @@ function findById(id) {
   return db("users")
     .where({ id })
     .first();
+}
+
+function getExercisesByUserId(id) {
+  return db("exercises").where({ user_id: id });
 }
