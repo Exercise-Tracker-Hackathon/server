@@ -42,4 +42,16 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+
+  Exercises.remove(id)
+    .then(deleted => {
+      res.status(200).json({ message: "Exercise deleted successfully" });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 module.exports = router;
